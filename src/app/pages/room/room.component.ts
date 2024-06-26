@@ -28,7 +28,13 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { TodoService } from '../../todo.service';
 import { User } from '../../types/user';
-import { catchError, Observable } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  Subject,
+} from 'rxjs';
 
 @Component({
   selector: 'app-room',
@@ -156,7 +162,7 @@ export class UsersDialog {
 
   constructor(
     public dialogRef: MatDialogRef<UsersDialogData>,
-    @Inject(MAT_DIALOG_DATA) public data: UsersDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: UsersDialogData
   ) {}
 
   removeUser(user: User) {
@@ -170,7 +176,7 @@ export class UsersDialog {
       catchError((err) => {
         console.log(err.message);
         return err;
-      }),
+      })
     );
   }
 
@@ -197,19 +203,23 @@ export class UsersDialog {
 })
 export class AddUserDialog {
   todoService = inject(TodoService);
+  searchUser = new Subject<string>();
 
   constructor(
     public dialogRef: MatDialogRef<AddUserDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+    {
+      this.searchUser
+        .pipe(debounceTime(400), distinctUntilChanged())
+        .subscribe((value) => {
+          if (!value) this.todoService.users.set([]);
+          else this.todoService.getUsers(value);
+        });
+    }
+  }
 
   search = '';
-
-  searchUser(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.value) this.todoService.users.set([]);
-    else this.todoService.getUsers(input.value);
-  }
 
   addUser(user: User) {
     if (!this.data.roomId) {
@@ -252,7 +262,7 @@ export class EditDialog {
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogData>,
-    @Inject(MAT_DIALOG_DATA) public data: EditDialogData,
+    @Inject(MAT_DIALOG_DATA) public data: EditDialogData
   ) {}
 
   name = this.data.name;
