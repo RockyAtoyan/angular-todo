@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Edit room info.</h2>
+<mat-dialog-content>
+  <div class="flex flex-col gap-2">
+    <label [for]="data.roomId">Room's name</label>
+    <input
+      [id]="data.roomId"
+      [(ngModel)]="name"
+      (keyup.enter)="edit()"
+      class="input w-full"
+      placeholder="New room's name"
+    />
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="edit()">Edit</button>
+</mat-dialog-actions>

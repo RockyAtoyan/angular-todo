@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Users in room.</h2>
+<mat-dialog-content>
+  <div class="flex flex-col gap-2">
+    <div class="border-b-2 border-b-amber-500">
+      <h3 class="py-3">
+        Admin: <strong>{{ this.data.admin.login }}</strong>
+      </h3>
+    </div>
+    @if (this.data.users.length) {
+      <div
+        class="flex flex-col gap-2 py-2 min-h-[100px] max-h-[150px] overflow-auto"
+      >
+        @for (user of this.data.users; track user.id) {
+          <div class="flex items-center justify-between">
+            <span>{{ user.login }}</span>
+            <button (click)="removeUser(user)">
+              <mat-icon class="text-2xl">close</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    } @else {
+      <h2>No users!</h2>
+    }
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Exit</button>
+</mat-dialog-actions>

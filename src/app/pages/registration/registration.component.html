@@ -1,0 +1,57 @@
+<div
+  class="mt-20 flex items-center justify-center w-full h-full overflow-hidden"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="fade-in flex flex-col gap-6 w-[40%] backdrop-blur p-10 rounded-xl border-2 border-zinc-300/30"
+  >
+    <h1 class="text-2xl text-white text-center font-semibold mb-4">
+      Sign up new account
+    </h1>
+    <input
+      type="text"
+      placeholder="Login"
+      class="input"
+      formControlName="login"
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      class="input"
+      formControlName="password"
+    />
+    <div class="mt-2 flex items-center justify-between">
+      <div class="flex items-center justify-center">
+        <label
+          for="signup_file"
+          class="cursor-pointer flex items-center gap-2 text-lg"
+          hlmBtn
+          variant="secondary"
+        >
+          <span>Choose avatar </span>
+          @if (image) {
+            <span class="flex items-center">
+              <mat-icon class="text-green-500">check</mat-icon>
+            </span>
+          }
+        </label>
+        <input
+          id="signup_file"
+          type="file"
+          #imageRef
+          (change)="onFileChanged($event)"
+          hidden
+        />
+      </div>
+      <button class="w-1/2 text-lg" type="submit" hlmBtn>Sign up</button>
+    </div>
+
+    <h2
+      class="text-white text-lg font-semibold flex items-center justify-center gap-2"
+    >
+      <span>Already have account?</span>
+      <a routerLink="/login" class="text-amber-500 underline">Sign in</a>
+    </h2>
+  </form>
+</div>

@@ -1,8 +1,7 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -19,10 +18,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@spartan-ng/ui-button-helm": [
+        ".\\src/app/ui/ui-button-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-badge-helm": [".\\src/app/ui/ui-badge-helm/src/index.ts"],
+      "@spartan-ng/ui-sonner-helm": [
+        ".\\src/app/ui/ui-sonner-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-icon-helm": [".\\src/app/ui/ui-icon-helm/src/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

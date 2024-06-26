@@ -1,0 +1,108 @@
+<header
+  class="header w-full justify-center bg-zinc-900 absolute top-0 left-0 px-4 border-b-2 border-b-amber-500/30"
+>
+  <div class="h-[var(--header-h)] flex items-center justify-between">
+    <a routerLink="/" class="text-white italic text-2xl font-semibold"
+      >ArmPlanner</a
+    >
+    @if (userSignal()) {
+      <div class="flex items-center gap-8 text-white">
+        <div class="flex items-center gap-6">
+          <div class="rooms_select relative">
+            <button
+              class=""
+              (click)="toggleRoomsSelect()"
+              hlmBadge
+              variant="destructive"
+            >
+              {{ room()?.name || "Select an room" }}
+            </button>
+            <div class="rooms" #select>
+              @if (
+                userSignal()?.adminRooms && userSignal()!.adminRooms.length
+              ) {
+                <div class="flex flex-col gap-2">
+                  @for (room of userSignal()?.adminRooms; track room.id) {
+                    <a
+                      class="text-white"
+                      (click)="toggleRoomsSelect()"
+                      [routerLink]="['/room/', room.id]"
+                      >{{ room.name }}</a
+                    >
+                  }
+                </div>
+              } @else {
+                <h2>No admin rooms!</h2>
+              }
+              <div class="w-full h-0.5 bg-amber-600"></div>
+              @if (userSignal()?.rooms && userSignal()!.rooms.length) {
+                <div class="flex flex-col gap-2">
+                  @for (room of userSignal()?.rooms; track room.id) {
+                    <a
+                      class="text-white"
+                      (click)="toggleRoomsSelect()"
+                      [routerLink]="['/room/', room.id]"
+                      >{{ room.name }}</a
+                    >
+                  }
+                </div>
+              } @else {
+                <h2>No rooms!</h2>
+              }
+            </div>
+          </div>
+          <div class="orders relative">
+            <button
+              class="flex items-center justify-center underline underline-offset-4"
+              (click)="toggleOrders()"
+              [matBadge]="auth.orders.length || null"
+              matBadgeSize="small"
+              matBadgeColor="primary"
+            >
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <div class="orders_items" #orders>
+              @if (auth.orders.length) {
+                @for (order of userSignal()?.orders; track order.id) {
+                  <div class="flex flex-col gap-2">
+                    <span
+                      >{{ order.room.admin.login }} invites you to room.</span
+                    >
+                    <div class="flex items-center gap-2">
+                      <Button
+                        class="underline underline-offset-2 bg-green-600 rounded text-sm"
+                        (click)="acceptInvateToRoom(order)"
+                      >
+                        accept
+                      </Button>
+                      <Button
+                        class="underline underline-offset-2 bg-red-600 rounded text-sm"
+                        (click)="rejectInvateToRoom(order)"
+                      >
+                        reject
+                      </Button>
+                    </div>
+                  </div>
+                }
+              } @else {
+                <h2>No notifications!</h2>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-5 text-white text-lg">
+          <a
+            class="italic text-lg px-0"
+            hlmBtn
+            variant="link"
+            routerLink="/dashboard"
+            >{{ userSignal()?.login }}</a
+          >
+          <logout-button></logout-button>
+        </div>
+      </div>
+    } @else {
+      <a routerLink="/login" hlmBtn variant="link" size="sm">Sign in</a>
+    }
+  </div>
+</header>

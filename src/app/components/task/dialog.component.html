@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Edit task</h2>
+<mat-dialog-content>
+  <form class="flex flex-col gap-4" (ngSubmit)="onSubmit()">
+    <input
+      placeholder="Task text"
+      name="text"
+      class="input"
+      type="text"
+      [(ngModel)]="data.text"
+    />
+    <input
+      name="deadline"
+      class="input"
+      type="datetime-local"
+      [(ngModel)]="data.deadline"
+    />
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'center'">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="{ text: data.text, deadline: data.deadline }"
+  >
+    Edit
+  </button>
+</mat-dialog-actions>

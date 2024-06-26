@@ -1,0 +1,31 @@
+.rooms_select {
+}
+
+.rooms,
+.orders_items {
+  @apply bg-zinc-900 p-4 rounded-[10px] border-2 border-zinc-400/40;
+  position: absolute;
+  z-index: 2;
+  top: 150%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  height: 150px;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95) translate3d(-50%, 0, 0);
+  transform-origin: top;
+  transition: all 0.1s ease;
+  &.active {
+    opacity: 1;
+    transform: scale(1) translate3d(-50%, 0, 0);
+    visibility: visible;
+  }
+}
+
+.orders_items {
+  width: 300px;
+}

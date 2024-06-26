@@ -1,1 +1,147 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+@import "ngx-toastr/toastr";
+
+.ngx-toastr {
+  box-shadow: none !important;
+}
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$todo-primary: mat.define-palette(mat.$indigo-palette);
+$todo-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$todo-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$todo-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $todo-primary,
+      accent: $todo-accent,
+      warn: $todo-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($todo-theme);
+
+@import "@angular/cdk/overlay-prebuilt.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-h: 50px;
+    --page-h: calc(100vh - 50px);
+  }
+  * {
+    font-family: "Inter", sans-serif;
+  }
+  body {
+    @apply bg-zinc-900;
+  }
+
+  input {
+    outline: 0;
+  }
+
+  .input {
+    @apply rounded border-[4px] transition-all border-zinc-400/50 focus:border-b-amber-400 py-2 px-4;
+  }
+
+  .transparent_input {
+    @apply transition-all bg-transparent text-white rounded border-2 border-zinc-400/50 py-2 px-4 backdrop-blur focus:border-amber-300/70;
+  }
+
+  .btn {
+    @apply px-4 py-2 text-lg font-semibold bg-amber-500 rounded text-white;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.4s;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --font-sans: "";
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --primary: 47.9 95.8% 53.1%;
+  --primary-foreground: 26 83.3% 14.1%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 20 14.3% 4.1%;
+  --foreground: 60 9.1% 97.8%;
+  --card: 20 14.3% 4.1%;
+  --card-foreground: 60 9.1% 97.8%;
+  --popover: 20 14.3% 4.1%;
+  --popover-foreground: 60 9.1% 97.8%;
+  --primary: 47.9 95.8% 53.1%;
+  --primary-foreground: 26 83.3% 14.1%;
+  --secondary: 12 6.5% 15.1%;
+  --secondary-foreground: 60 9.1% 97.8%;
+  --muted: 12 6.5% 15.1%;
+  --muted-foreground: 24 5.4% 63.9%;
+  --accent: 12 6.5% 15.1%;
+  --accent-foreground: 60 9.1% 97.8%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 12 6.5% 15.1%;
+  --input: 12 6.5% 15.1%;
+  --ring: 35.5 91.7% 32.9%;
+}
