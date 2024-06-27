@@ -36,8 +36,8 @@ export class AuthService {
     }
   }
 
-  auth() {
-    return this.server.auth().subscribe(
+  auth(isNot = false) {
+    return this.server.auth(isNot).subscribe(
       (value) => {
         this.userSignal.set(value.user);
         this.orders = value.user.orders;
@@ -89,7 +89,7 @@ export class AuthService {
     this.isConnected = true;
     this.socket.on('message', (message) => {
       const msg = JSON.parse(message);
-      this.auth();
+      this.auth(true);
       console.log(msg);
       if (msg.type === 'message') {
         this.openSnackbar(msg.data);

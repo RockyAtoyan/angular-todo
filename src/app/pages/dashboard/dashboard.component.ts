@@ -4,20 +4,26 @@ import { TodoService } from '../../todo.service';
 import { TodoComponent } from '../../components/todo/todo.component';
 import { CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
+import { HlmButtonDirective } from '../../ui/ui-button-helm/src/lib/hlm-button.directive';
 
 @Component({
   selector: 'app-todos',
   standalone: true,
   templateUrl: './dashboard.component.html',
-  imports: [TodoComponent, CdkDropListGroup, FormsModule],
+  imports: [
+    TodoComponent,
+    CdkDropListGroup,
+    FormsModule,
+    MatIcon,
+    HlmButtonDirective,
+  ],
 })
 export class DashboardComponent {
   authService = inject(AuthService);
   todoService = inject(TodoService);
 
   todoText: string = '';
-
-  roomName = '';
 
   changeTodoText(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -30,13 +36,5 @@ export class DashboardComponent {
     }
     this.todoService.addTodo({ text: this.todoText });
     this.todoText = '';
-  }
-
-  createRoom() {
-    if (!this.roomName) {
-      return;
-    }
-    this.todoService.createRoom(this.roomName);
-    this.roomName = '';
   }
 }

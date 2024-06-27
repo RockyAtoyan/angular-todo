@@ -1,42 +1,55 @@
-<div class="p-4 w-full bg-zinc-200 backdrop-blur rounded-[6px]">
+<div
+  class="p-4 w-full backdrop-blur rounded-[6px] bg-[#0D0714] text-[#9E78CF] border-[2px] border-dashed border-purple-700/50"
+>
   <div class="flex flex-col gap-3">
     <div class="flex items-start gap-[10px]">
       @if (editMode && (!isInRoom || (isInRoom && isAdmin))) {
-        <input
-          #edit
-          class="input text-xl w-full"
-          placeholder="Todo text"
-          type="text"
-          [value]="editTextValue"
-          (keyup)="changeEditText($event)"
-          (keyup.enter)="editTodo()"
-          (focusout)="setEditMode(false)"
-        />
+      <input
+        #edit
+        class="transparent_input text-xl w-full"
+        placeholder="Todo text"
+        type="text"
+        [value]="editTextValue"
+        (keyup)="changeEditText($event)"
+        (keyup.enter)="editTodo()"
+        (focusout)="setEditMode(false)"
+      />
       } @else {
-        <div class="text-xl w-full" (dblclick)="setEditMode(true)">
-          {{ todo.text }}
-        </div>
-      }
-      @if (!isInRoom || (isInRoom && isAdmin)) {
-        <button (click)="delete()">
-          <mat-icon class="text-xl text-red-700">delete</mat-icon>
-        </button>
+      <div
+        class="text-2xl w-full text-white underline"
+        (dblclick)="setEditMode(true)"
+      >
+        {{ todo.text }}
+      </div>
+      } @if (!isInRoom || (isInRoom && isAdmin)) {
+      <button (click)="delete()">
+        <mat-icon class="text-xl text-red-400">close</mat-icon>
+      </button>
       }
     </div>
-    <div class="filter flex items-center gap-2">
+    <div class="filter flex items-center justify-center gap-2">
       <button
+        hlmBtn
+        variant="outline"
+        size="sm"
         (click)="setFilter('all')"
         [class]="'text-sm' + (filter === 'all' ? ' active' : '')"
       >
         All
       </button>
       <button
+        hlmBtn
+        variant="outline"
+        size="sm"
         (click)="setFilter('active')"
         [class]="'text-sm' + (filter === 'active' ? ' active' : '')"
       >
         Active
       </button>
       <button
+        hlmBtn
+        variant="outline"
+        size="sm"
         (click)="setFilter('done')"
         [class]="'text-sm' + (filter === 'done' ? ' active' : '')"
       >
@@ -44,51 +57,46 @@
       </button>
     </div>
     @if (todo.tasks) {
-      <div
-        id="{{ todo.id }}"
-        class="tasks flex flex-col gap-2"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListConnectedTo]="getTasksGroups()"
-      >
-        @if (filterTasks(todo.tasks).length) {
-          <div class="w-full h-[2px] bg-zinc-300"></div>
-        }
-        @for (task of filterTasks(todo.tasks); track task.id) {
-          <app-task
-            [task]="task"
-            [isInRoom]="isInRoom"
-            [isAdmin]="isAdmin"
-            cdkDrag
-          ></app-task>
-        }
-        @if (!filterTasks(todo.tasks).length) {
-          <h2>No tasks!</h2>
-        }
-      </div>
-    } @else {
+    <div
+      id="{{ todo.id }}"
+      class="tasks flex flex-col gap-2"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListConnectedTo]="getTasksGroups()"
+    >
+      @if (filterTasks(todo.tasks).length) {
+      <!-- <div class="w-full h-[2px] bg-zinc-300 my-3"></div> -->
+      } @for (task of filterTasks(todo.tasks); track task.id) {
+      <app-task
+        [task]="task"
+        [isInRoom]="isInRoom"
+        [isAdmin]="isAdmin"
+        cdkDrag
+      ></app-task>
+      } @if (!filterTasks(todo.tasks).length) {
       <h2>No tasks!</h2>
-    }
-    @if (!isInRoom || (isInRoom && isAdmin)) {
-      @if (addTaskMode) {
-        <input
-          #editTask
-          class="input"
-          placeholder="Task text"
-          type="text"
-          [value]="taskTextValue"
-          (keyup)="changeTaskText($event)"
-          (keyup.enter)="addTask()"
-          (focusout)="setAddTaskMode(false)"
-        />
-      } @else {
-        <button
-          class="text-base text-zinc-700 text-start mt-3"
-          (click)="setAddTaskMode(true)"
-        >
-          Add new task +
-        </button>
       }
-    }
+    </div>
+    } @else {
+    <h2>No tasks!</h2>
+    } @if (!isInRoom || (isInRoom && isAdmin)) { @if (addTaskMode) {
+    <input
+      #editTask
+      class="transparent_input"
+      placeholder="Task text"
+      type="text"
+      [value]="taskTextValue"
+      (keyup)="changeTaskText($event)"
+      (keyup.enter)="addTask()"
+      (focusout)="setAddTaskMode(false)"
+    />
+    } @else {
+    <button
+      class="text-base text-zinc-700 text-start mt-3"
+      (click)="setAddTaskMode(true)"
+    >
+      Add new task +
+    </button>
+    } }
   </div>
 </div>

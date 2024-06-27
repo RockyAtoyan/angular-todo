@@ -1,108 +1,139 @@
 <header
-  class="header w-full justify-center bg-zinc-900 absolute top-0 left-0 px-4 border-b-2 border-b-amber-500/30"
+  class="header w-full justify-center bg-zinc-900 absolute top-0 left-0 px-4 border-b-2 border-b-violet-500/30"
 >
-  <div class="h-[var(--header-h)] flex items-center justify-between">
-    <a routerLink="/" class="text-white italic text-2xl font-semibold"
-      >ArmPlanner</a
+  <div
+    class="h-[var(--header-h)] max-w-[1232px] px-4 mx-auto flex items-center justify-between"
+  >
+    <a routerLink="/" class="text-white text-2xl font-semibold"
+      ><span class="text-violet-400">Angular</span>Todo</a
     >
     @if (userSignal()) {
-      <div class="flex items-center gap-8 text-white">
-        <div class="flex items-center gap-6">
-          <div class="rooms_select relative">
-            <button
-              class=""
-              (click)="toggleRoomsSelect()"
-              hlmBadge
-              variant="destructive"
-            >
-              {{ room()?.name || "Select an room" }}
-            </button>
-            <div class="rooms" #select>
-              @if (
-                userSignal()?.adminRooms && userSignal()!.adminRooms.length
-              ) {
-                <div class="flex flex-col gap-2">
-                  @for (room of userSignal()?.adminRooms; track room.id) {
-                    <a
-                      class="text-white"
-                      (click)="toggleRoomsSelect()"
-                      [routerLink]="['/room/', room.id]"
-                      >{{ room.name }}</a
-                    >
-                  }
-                </div>
-              } @else {
-                <h2>No admin rooms!</h2>
-              }
-              <div class="w-full h-0.5 bg-amber-600"></div>
-              @if (userSignal()?.rooms && userSignal()!.rooms.length) {
-                <div class="flex flex-col gap-2">
-                  @for (room of userSignal()?.rooms; track room.id) {
-                    <a
-                      class="text-white"
-                      (click)="toggleRoomsSelect()"
-                      [routerLink]="['/room/', room.id]"
-                      >{{ room.name }}</a
-                    >
-                  }
-                </div>
-              } @else {
-                <h2>No rooms!</h2>
-              }
+    <div class="flex items-center gap-4 text-white">
+      <div class="flex items-center gap-6">
+        <div class="orders relative">
+          <button
+            class="flex items-center justify-center underline underline-offset-4"
+            (click)="toggleOrders()"
+            [matBadge]="auth.orders.length || null"
+            matBadgeSize="small"
+            matBadgeColor="primary"
+          >
+            <mat-icon>notifications</mat-icon>
+          </button>
+          <div class="orders_items" #orders>
+            @if (auth.orders.length) { @for (order of userSignal()?.orders;
+            track order.id) {
+            <div class="flex flex-col gap-2">
+              <span>{{ order.room.admin.login }} invites you to room.</span>
+              <div class="flex items-center gap-2">
+                <button hlmBtn class="" (click)="acceptInvateToRoom(order)">
+                  Accept
+                </button>
+                <button
+                  hlmBtn
+                  variant="destructive"
+                  class=""
+                  (click)="rejectInvateToRoom(order)"
+                >
+                  Reject
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="orders relative">
-            <button
-              class="flex items-center justify-center underline underline-offset-4"
-              (click)="toggleOrders()"
-              [matBadge]="auth.orders.length || null"
-              matBadgeSize="small"
-              matBadgeColor="primary"
-            >
-              <mat-icon>notifications</mat-icon>
-            </button>
-            <div class="orders_items" #orders>
-              @if (auth.orders.length) {
-                @for (order of userSignal()?.orders; track order.id) {
-                  <div class="flex flex-col gap-2">
-                    <span
-                      >{{ order.room.admin.login }} invites you to room.</span
-                    >
-                    <div class="flex items-center gap-2">
-                      <Button
-                        class="underline underline-offset-2 bg-green-600 rounded text-sm"
-                        (click)="acceptInvateToRoom(order)"
-                      >
-                        accept
-                      </Button>
-                      <Button
-                        class="underline underline-offset-2 bg-red-600 rounded text-sm"
-                        (click)="rejectInvateToRoom(order)"
-                      >
-                        reject
-                      </Button>
-                    </div>
-                  </div>
-                }
-              } @else {
-                <h2>No notifications!</h2>
-              }
-            </div>
+            } } @else {
+            <div>No notifications!</div>
+            }
           </div>
         </div>
-        <div class="flex items-center gap-5 text-white text-lg">
-          <a
-            class="italic text-lg px-0"
+        <brn-separator hlmSeparator orientation="vertical" class="h-5" />
+        <div class="rooms_select flex items-center gap-3 relative">
+          <button
             hlmBtn
-            variant="link"
-            routerLink="/dashboard"
-            >{{ userSignal()?.login }}</a
+            class="h-6"
+            (click)="toggleRoomsSelect()"
+            variant="default"
+            size="sm"
           >
-          <logout-button></logout-button>
+            {{ room()?.name || "Select an room" }}
+          </button>
+          <div class="rooms" #select>
+            @if ( userSignal()?.adminRooms && userSignal()!.adminRooms.length )
+            {
+            <div class="flex flex-col gap-2">
+              @for (room of userSignal()?.adminRooms; track room.id) {
+              <a
+                class="text-white"
+                (click)="toggleRoomsSelect()"
+                [routerLink]="['/room/', room.id]"
+                >{{ room.name }}</a
+              >
+              }
+            </div>
+            } @else {
+            <div>No admin rooms!</div>
+            }
+            <div class="w-full h-0.5 bg-violet-600"></div>
+            @if (userSignal()?.rooms && userSignal()!.rooms.length) {
+            <div class="flex flex-col gap-2">
+              @for (room of userSignal()?.rooms; track room.id) {
+              <a
+                class="text-white"
+                (click)="toggleRoomsSelect()"
+                [routerLink]="['/room/', room.id]"
+                >{{ room.name }}</a
+              >
+              }
+            </div>
+            } @else {
+            <div>No rooms!</div>
+            }
+          </div>
+          <hlm-dialog class="flex items-center">
+            <button
+              brnDialogTrigger
+              hlmBtn
+              size="icon"
+              variant="ghost"
+              class="h-6"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <hlm-dialog-content *brnDialogContent="let ctx">
+              <hlm-dialog-header>
+                <h3 brnDialogTitle hlm>Create new room.</h3>
+              </hlm-dialog-header>
+              <div class="flex flex-col text-black gap-2">
+                <input
+                  id="new_room"
+                  placeholder="Room's name"
+                  class="transparent_input text-black"
+                  type="text"
+                  [(ngModel)]="roomName"
+                  (keyup.enter)="createRoom()"
+                />
+              </div>
+              <hlm-dialog-footer>
+                <button hlmBtn (click)="createRoom()">
+                  Create
+                </button>
+              </hlm-dialog-footer>
+            </hlm-dialog-content>
+          </hlm-dialog>
         </div>
       </div>
+      <brn-separator hlmSeparator orientation="vertical" class="h-5" />
+      <div class="flex items-center gap-5 text-white text-lg">
+        <a
+          class="text-lg text-violet-300 px-0 transition-all hover:underline"
+          routerLink="/dashboard"
+          >{{ userSignal()?.login }}</a
+        >
+        <logout-button class="flex items-center"></logout-button>
+      </div>
+    </div>
     } @else {
-      <a routerLink="/login" hlmBtn variant="link" size="sm">Sign in</a>
+    <a routerLink="/login" hlmBtn variant="default" class="h-8" size="sm"
+      >Sign in</a
+    >
     }
   </div>
 </header>

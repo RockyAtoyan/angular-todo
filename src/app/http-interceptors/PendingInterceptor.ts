@@ -18,7 +18,7 @@ export class PendingInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loaderService.isLoading.next(true);
+    if (!request.url.includes('isNot')) this.loaderService.isLoading.next(true);
     this.count++;
     return next.handle(request).pipe(
       delay(0),

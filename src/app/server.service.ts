@@ -36,7 +36,7 @@ export class ServerService {
     if (!payload.login || !payload.password) return;
     return this.http.post<{ user: User; accessToken: string }>(
       '/auth/login',
-      payload,
+      payload
     );
   }
 
@@ -44,8 +44,10 @@ export class ServerService {
     return this.http.get('/auth/logout');
   }
 
-  auth() {
-    return this.http.get<{ user: User; accessToken: string }>('/auth/refresh');
+  auth(isNot = false) {
+    return this.http.get<{ user: User; accessToken: string }>(
+      `/auth/refresh${isNot ? `?isNot=true` : ''}`
+    );
   }
 
   async isAuthenticated() {
@@ -101,7 +103,7 @@ export class ServerService {
     prevTodoId: string,
     dropTaskId?: string,
     direction?: 'top' | 'bottom',
-    order?: number,
+    order?: number
   ) {
     return this.http.put<boolean>(`/todo/task/push/${todoId}`, {
       taskId,

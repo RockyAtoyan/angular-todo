@@ -1,34 +1,66 @@
-<div
-  class="mt-20 flex items-center justify-center w-full h-full overflow-hidden"
->
-  <form
-    class="fade-in flex flex-col gap-6 w-[40%] backdrop-blur p-10 rounded-xl border-2 border-zinc-300/30"
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
+<div class="w-full h-screen overflow-hidden flex items-stretch">
+  <div class="w-3/5 h-full bg-purple-400">
+    <img
+      class="w-full h-full object-cover object-center"
+      src="assets/bg.jpg"
+      alt="login"
+    />
+  </div>
+  <div
+    class="w-1/2 fade-in py-5 px-10 flex flex-col gap-8 items-center justify-center h-full overflow-hidden"
   >
-    <h1 class="text-2xl text-white text-center font-semibold mb-4">
-      Sign in your account
-    </h1>
-    <input
-      type="text"
-      placeholder="Login"
-      class="input"
-      formControlName="login"
-    />
-    <input
-      type="password"
-      class="input"
-      placeholder="Password"
-      formControlName="password"
-    />
-    <button type="submit" class="w-1/2 mt-2 mx-auto text-xl" size="lg" hlmBtn>
-      Sign in
-    </button>
-    <h2
-      class="text-white text-lg font-semibold flex items-center justify-center gap-2"
+    <div class="flex flex-col text-center items-center">
+      <div class="text-5xl uppercase text-white text-center font-semibold mb-4">
+        Welcome back
+      </div>
+      <div class="text-white/60 text-lg">
+        Welcome back! Please enter your details.
+      </div>
+    </div>
+    <form
+      class="flex flex-col gap-6 w-full backdrop-blur p-10 pt-0 rounded-xl"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
     >
-      <span>Not a member?</span>
-      <a routerLink="/signup" class="text-amber-500 underline">Sign up</a>
-    </h2>
-  </form>
+      <div class="flex flex-col gap-3">
+        <label
+          class="text-white text-base font-semibold cursor-pointer"
+          for="login"
+          >Login</label
+        >
+        <input
+          id="login"
+          type="text"
+          placeholder="Enter your login"
+          class="transparent_input text-lg"
+          formControlName="login"
+        />
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <label
+          class="text-white text-base font-semibold cursor-pointer"
+          for="password"
+          >Password</label
+        >
+        <input
+          id="password"
+          type="password"
+          class="transparent_input text-lg"
+          placeholder="**********"
+          formControlName="password"
+        />
+      </div>
+
+      <button type="submit" class="w-1/2 mt-2 mx-auto text-lg" size="lg" hlmBtn>
+        Sign in
+      </button>
+      <h2
+        class="text-white text-base font-semibold flex items-center justify-center gap-2"
+      >
+        <span>Not a member?</span>
+        <a routerLink="/signup" class="text-violet-600 underline">Sign up</a>
+      </h2>
+    </form>
+  </div>
 </div>

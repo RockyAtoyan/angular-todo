@@ -18,16 +18,32 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
       "@spartan-ng/ui-button-helm": [
         ".\\src/app/ui/ui-button-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-badge-helm": [".\\src/app/ui/ui-badge-helm/src/index.ts"],
+      "@spartan-ng/ui-badge-helm": [
+        ".\\src/app/ui/ui-badge-helm/src/index.ts"
+      ],
       "@spartan-ng/ui-sonner-helm": [
         ".\\src/app/ui/ui-sonner-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-icon-helm": [".\\src/app/ui/ui-icon-helm/src/index.ts"]
+      "@spartan-ng/ui-icon-helm": [
+        ".\\src/app/ui/ui-icon-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-separator-helm": [
+        ".\\src/app/ui/ui-separator-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-dialog-helm": [
+        ".\\src/app/ui/ui-dialog-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-sheet-helm": [
+        ".\\src/app/ui/ui-sheet-helm/src/index.ts"
+      ]
     }
   },
   "angularCompilerOptions": {

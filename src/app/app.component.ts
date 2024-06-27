@@ -31,7 +31,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   public isloading: boolean = false;
-
+  
   constructor(
     private authService: AuthService,
     private todoService: TodoService,

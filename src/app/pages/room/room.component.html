@@ -1,54 +1,61 @@
 <div class="p-6 px-10">
-  @if (authService.userSignal()) {
-    @if (room()?.isAdmin) {
-      <div class="flex items-center justify-between mb-8">
-        <input
-          placeholder="New todo"
-          class="transparent_input w-[20%] text-sm py-1"
-          type="text"
-          [value]="todoText"
-          (keyup)="changeTodoText($event)"
-          (keyup.enter)="addTodo()"
-        />
-        <div class="flex items-center gap-4">
-          <button (click)="openEditDialog()">
-            <mat-icon class="text-2xl text-white">edit</mat-icon>
-          </button>
-          <button (click)="openUsersDialog()">
-            <mat-icon class="text-2xl text-white">group</mat-icon>
-          </button>
-          <button (click)="openAddUserDialog()">
-            <mat-icon class="text-2xl text-white">add</mat-icon>
-          </button>
-          <button (click)="delete()">
-            <mat-icon class="text-2xl text-rose-400">delete</mat-icon>
-          </button>
-        </div>
-      </div>
-    } @else {
-      <div class="flex items-center justify-end mb-8">
-        <button (click)="leave()">
-          <mat-icon class="text-2xl text-rose-400">logout</mat-icon>
-        </button>
-      </div>
-    }
-
-    @if (room()?.todos && room()!.todos.length) {
-      <div class="grid grid-cols-3 h-full gap-20" cdkDropListGroup>
-        @for (todo of room()?.todos; track todo.id) {
-          <app-todo
-            [todo]="todo"
-            [isInRoom]="true"
-            [isAdmin]="!!room()?.isAdmin"
-          ></app-todo>
-        }
-      </div>
-    } @else {
-      <h2
-        class="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl"
+  @if (authService.userSignal()) { @if (room()?.isAdmin) {
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-4 w-1/2">
+      <input
+        placeholder="Add a new todo"
+        class="transparent_input w-full"
+        type="text"
+        [value]="todoText"
+        (keyup)="changeTodoText($event)"
+        (keyup.enter)="addTodo()"
+      />
+      <button
+        hlmBtn
+        class="bg-[#9E78CF] h-[2.3rem] w-[4rem]"
+        size="icon"
+        (click)="addTodo()"
       >
-        No todos!
-      </h2>
+        <mat-icon class="text-white">add</mat-icon>
+      </button>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <button (click)="openEditDialog()">
+        <mat-icon class="text-2xl text-white">edit</mat-icon>
+      </button>
+      <button (click)="openUsersDialog()">
+        <mat-icon class="text-2xl text-white">group</mat-icon>
+      </button>
+      <button (click)="openAddUserDialog()">
+        <mat-icon class="text-2xl text-white">add</mat-icon>
+      </button>
+      <button (click)="delete()">
+        <mat-icon class="text-2xl text-rose-400">delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  } @else {
+  <div class="flex items-center justify-end mb-8">
+    <button (click)="leave()">
+      <mat-icon class="text-2xl text-rose-400">logout</mat-icon>
+    </button>
+  </div>
+  } @if (room()?.todos && room()!.todos.length) {
+  <div class="grid grid-cols-3 h-full gap-20" cdkDropListGroup>
+    @for (todo of room()?.todos; track todo.id) {
+    <app-todo
+      [todo]="todo"
+      [isInRoom]="true"
+      [isAdmin]="!!room()?.isAdmin"
+    ></app-todo>
     }
-  }
+  </div>
+  } @else {
+  <h2
+    class="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl"
+  >
+    No todos!
+  </h2>
+  } }
 </div>

@@ -1,57 +1,87 @@
-<div
-  class="mt-20 flex items-center justify-center w-full h-full overflow-hidden"
->
-  <form
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    class="fade-in flex flex-col gap-6 w-[40%] backdrop-blur p-10 rounded-xl border-2 border-zinc-300/30"
+<div class="w-full h-screen overflow-hidden flex items-stretch">
+  <div class="w-3/5 h-full bg-purple-400">
+    <img
+      class="w-full h-full object-cover object-center"
+      src="assets/bg.jpg"
+      alt="login"
+    />
+  </div>
+  <div
+    class="w-1/2 fade-in py-5 px-10 flex flex-col gap-8 items-center justify-center h-full overflow-hidden"
   >
-    <h1 class="text-2xl text-white text-center font-semibold mb-4">
-      Sign up new account
-    </h1>
-    <input
-      type="text"
-      placeholder="Login"
-      class="input"
-      formControlName="login"
-    />
-    <input
-      type="password"
-      placeholder="Password"
-      class="input"
-      formControlName="password"
-    />
-    <div class="mt-2 flex items-center justify-between">
-      <div class="flex items-center justify-center">
+    <div class="flex flex-col text-center items-center">
+      <div class="text-5xl uppercase text-white text-center font-semibold mb-4">
+        Create new account
+      </div>
+      <div class="text-white/60 text-lg">
+        Don't have an account? Create new one.
+      </div>
+    </div>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-6 w-full backdrop-blur p-10 pt-0 rounded-xl"
+    >
+      <div class="flex flex-col gap-3">
         <label
-          for="signup_file"
-          class="cursor-pointer flex items-center gap-2 text-lg"
-          hlmBtn
-          variant="secondary"
+          class="text-white text-base font-semibold cursor-pointer"
+          for="login"
+          >Login</label
         >
-          <span>Choose avatar </span>
-          @if (image) {
+        <input
+          id="login"
+          type="text"
+          placeholder="Enter your login"
+          class="transparent_input text-lg"
+          formControlName="login"
+        />
+      </div>
+      <div class="flex flex-col gap-3">
+        <label
+          class="text-white text-base font-semibold cursor-pointer"
+          for="password"
+          >Password</label
+        >
+        <input
+          id="password"
+          type="password"
+          class="transparent_input text-lg"
+          placeholder="**********"
+          formControlName="password"
+        />
+      </div>
+      <div class="mt-2 flex items-center justify-between">
+        <div class="flex items-center justify-center">
+          <label
+            for="signup_file"
+            class="cursor-pointer flex items-center gap-2 text-lg"
+            hlmBtn
+            variant="secondary"
+          >
+            <span>Choose avatar </span>
+            @if (image) {
             <span class="flex items-center">
               <mat-icon class="text-green-500">check</mat-icon>
             </span>
-          }
-        </label>
-        <input
-          id="signup_file"
-          type="file"
-          #imageRef
-          (change)="onFileChanged($event)"
-          hidden
-        />
+            }
+          </label>
+          <input
+            id="signup_file"
+            type="file"
+            #imageRef
+            (change)="onFileChanged($event)"
+            hidden
+          />
+        </div>
+        <button class="w-1/2 text-lg" type="submit" hlmBtn>Sign up</button>
       </div>
-      <button class="w-1/2 text-lg" type="submit" hlmBtn>Sign up</button>
-    </div>
 
-    <h2
-      class="text-white text-lg font-semibold flex items-center justify-center gap-2"
-    >
-      <span>Already have account?</span>
-      <a routerLink="/login" class="text-amber-500 underline">Sign in</a>
-    </h2>
-  </form>
+      <h2
+        class="text-white text-lg font-semibold flex items-center justify-center gap-2"
+      >
+        <span>Already have account?</span>
+        <a routerLink="/login" class="text-violet-600 underline">Sign in</a>
+      </h2>
+    </form>
+  </div>
 </div>

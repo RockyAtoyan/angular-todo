@@ -31,7 +31,7 @@ export class LoginComponent {
     private authService: AuthService,
     private todoService: TodoService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   onSubmit(): void {
@@ -42,8 +42,8 @@ export class LoginComponent {
     formData.append('password', password);
     this.server.login(formData)?.subscribe({
       next: (value) => {
-        this.authService.userSignal.set(value.user);
         localStorage.setItem('accessToken', value.accessToken);
+        this.authService.auth();
         this.todoService.getTodos();
         const callbackUrl =
           this.route.snapshot?.queryParams['callbackUrl'] || null;

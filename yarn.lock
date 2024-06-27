@@ -3597,6 +3597,27 @@
   dependencies:
     tslib "^2.3.0"
 
+"@spartan-ng/ui-dialog-brain@^0.0.1-alpha.352":
+  version "0.0.1-alpha.352"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-dialog-brain/-/ui-dialog-brain-0.0.1-alpha.352.tgz#22fea2b764f6b99749cc82eb1fcaebebb9d88fd6"
+  integrity sha512-nS8uitcb+N6B9ULszlQQgHkCVb3w2XAgB0ySPgaznzPVEryZnKpRMFKLzrTVkj32q0bo5C+LV1SgEvK8sZ/QrA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@spartan-ng/ui-separator-brain@0.0.1-alpha.344":
+  version "0.0.1-alpha.344"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-separator-brain/-/ui-separator-brain-0.0.1-alpha.344.tgz#c29ccf1fe2be97bf4538ad03632dca3ff2996ff1"
+  integrity sha512-VYpApU0g27EvQWMYiajo8XeCXi4j6rQXIhTKufxXBA2wTeXdp4sK6YoVVb36uFPWRXoW55YXmYbSeeiqzsa1/g==
+  dependencies:
+    tslib "^2.3.0"
+
+"@spartan-ng/ui-sheet-brain@0.0.1-alpha.344":
+  version "0.0.1-alpha.344"
+  resolved "https://registry.yarnpkg.com/@spartan-ng/ui-sheet-brain/-/ui-sheet-brain-0.0.1-alpha.344.tgz#7e3a202ba45d2989de17acc599c484705bc32dad"
+  integrity sha512-VVlM307s0M+IkL/fBKKnpeD3MWpJQtk1CB+TmuevO3uA3H9Yz2/arywEzwK/s0ntoArW9EGANRvmuNGKljNtDg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
@@ -7164,6 +7185,13 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+lucide-angular@^0.397.0:
+  version "0.397.0"
+  resolved "https://registry.yarnpkg.com/lucide-angular/-/lucide-angular-0.397.0.tgz#0a7d5035b7864b624ded8b63679f31eaaa658c00"
+  integrity sha512-QVBNv4rEbPi4ezC2SsjywrvuEtmhBaqUiV1E/nuLA1AoqToWuWIZ3dbZ1NBoR1NrS9Z0rzxb3pC6IFJfMYGMZg==
+  dependencies:
+    tslib "^2.3.0"
 
 magic-string@0.30.7:
   version "0.30.7"

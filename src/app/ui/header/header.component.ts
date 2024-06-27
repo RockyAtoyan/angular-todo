@@ -28,6 +28,21 @@ import { MatIcon } from '@angular/material/icon';
 import { MatBadge } from '@angular/material/badge';
 import { HlmBadgeDirective } from '@spartan-ng/ui-badge-helm';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { BrnSeparatorComponent } from '@spartan-ng/ui-separator-brain';
+import { HlmSeparatorDirective } from '../ui-separator-helm/src/lib/hlm-separator.directive';
+import {
+  BrnDialogContentDirective,
+  BrnDialogTriggerDirective,
+} from '@spartan-ng/ui-dialog-brain';
+import {
+  HlmDialogComponent,
+  HlmDialogContentComponent,
+  HlmDialogDescriptionDirective,
+  HlmDialogFooterComponent,
+  HlmDialogHeaderComponent,
+  HlmDialogTitleDirective,
+  HlmDialogCloseDirective,
+} from '@spartan-ng/ui-dialog-helm';
 
 @Component({
   selector: 'app-header',
@@ -44,6 +59,16 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
     HlmBadgeDirective,
     HlmButtonDirective,
     HlmButtonDirective,
+    BrnSeparatorComponent,
+    HlmSeparatorDirective,
+    HlmDialogComponent,
+    HlmDialogContentComponent,
+    HlmDialogFooterComponent,
+    HlmDialogHeaderComponent,
+    BrnDialogContentDirective,
+    BrnDialogTriggerDirective,
+    FormsModule,
+    HlmDialogCloseDirective,
   ],
   providers: [],
   templateUrl: './header.component.html',
@@ -51,15 +76,17 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-  auth = inject(AuthService);
-  userSignal: WritableSignal<User | null> = this.auth.userSignal;
-  todoService = inject(TodoService);
-  router = inject(Router);
+  public auth = inject(AuthService);
+  public userSignal: WritableSignal<User | null> = this.auth.userSignal;
+  public todoService = inject(TodoService);
+  public router = inject(Router);
 
-  room = this.todoService.room;
+  public room = this.todoService.room;
 
-  select = viewChild<ElementRef>('select');
-  orders = viewChild<ElementRef>('orders');
+  public select = viewChild<ElementRef>('select');
+  public orders = viewChild<ElementRef>('orders');
+
+  public roomName = '';
 
   constructor() {
     this.userSignal = this.auth.userSignal;
@@ -105,5 +132,13 @@ export class HeaderComponent {
   rejectInvateToRoom(order: Order) {
     this.todoService.rejectInviteToRoom(order.roomId, order.invitedId);
     // this.toggleOrders();
+  }
+
+  createRoom() {
+    if (!this.roomName) {
+      return;
+    }
+    this.todoService.createRoom(this.roomName);
+    this.roomName = '';
   }
 }

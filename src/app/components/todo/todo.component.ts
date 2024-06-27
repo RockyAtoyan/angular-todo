@@ -16,6 +16,7 @@ import { Task } from '../../types/task';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { MatDivider } from '@angular/material/divider';
+import { HlmButtonDirective } from '../../ui/ui-button-helm/src/lib/hlm-button.directive';
 
 export type TaskFilter = 'all' | 'done' | 'active';
 
@@ -31,6 +32,7 @@ export type TaskFilter = 'all' | 'done' | 'active';
     CdkDropList,
     CdkDrag,
     MatDivider,
+    HlmButtonDirective
   ],
 })
 export class TodoComponent implements OnInit, OnChanges {

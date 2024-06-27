@@ -1,41 +1,37 @@
-<div class="py-6 px-10">
+<div class="w-[60%] mx-auto py-6 px-2">
   @if (authService.userSignal()) {
-    <div class="flex items-center gap-2 justify-between mb-6">
+  <div class="flex items-center justify-center gap-2 mb-6">
+    <div class="flex items-center gap-4 w-1/2">
       <input
-        placeholder="New todo"
-        class="transparent_input w-[20%] text-sm py-1"
+        placeholder="Add a new todo"
+        class="transparent_input w-full"
         type="text"
         [value]="todoText"
         (keyup)="changeTodoText($event)"
         (keyup.enter)="addTodo()"
       />
-      <div class="w-[20%] flex items-center gap-2">
-        <label for="new_room" class="w-max text-nowrap text-white"
-          >New room:</label
-        >
-        <input
-          id="new_room"
-          placeholder="Room's name"
-          class="transparent_input w-full text-sm py-1"
-          type="text"
-          [(ngModel)]="roomName"
-          (keyup.enter)="createRoom()"
-        />
-      </div>
-    </div>
-
-    @if (todoService.todos() && todoService!.todos().length) {
-      <div class="grid grid-cols-3 h-full gap-20" cdkDropListGroup>
-        @for (todo of todoService.todos(); track todo.id) {
-          <app-todo [todo]="todo"></app-todo>
-        }
-      </div>
-    } @else {
-      <h2
-        class="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl"
+      <button
+        hlmBtn
+        class="bg-[#9E78CF] h-[2.3rem] w-[4rem]"
+        size="icon"
+        (click)="addTodo()"
       >
-        No todos!
-      </h2>
+        <mat-icon class="text-white">add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (todoService.todos() && todoService!.todos().length) {
+  <div class="grid grid-cols-1 h-full gap-10" cdkDropListGroup>
+    @for (todo of todoService.todos(); track todo.id) {
+    <app-todo [todo]="todo"></app-todo>
     }
-  }
+  </div>
+  } @else {
+  <h2
+    class="text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl"
+  >
+    No todos!
+  </h2>
+  } }
 </div>

@@ -4,7 +4,7 @@
     <input
       [(ngModel)]="search"
       (ngModelChange)="this.searchUser.next($event)"
-      class="input w-full"
+      class="transparent_input text-black w-full"
       placeholder="Type user's login"
     />
     @if (this.todoService.users().length) {

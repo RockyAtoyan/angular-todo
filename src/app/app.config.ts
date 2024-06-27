@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './http-interceptors';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
+import { LucideAngularModule, LogOut } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +19,6 @@ export const appConfig: ApplicationConfig = {
       preventDuplicates: true,
       progressBar: true,
     }),
+    importProvidersFrom(LucideAngularModule.pick({LogOut}))
   ],
 };

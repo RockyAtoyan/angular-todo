@@ -35,6 +35,7 @@ import {
   Observable,
   Subject,
 } from 'rxjs';
+import { HlmButtonDirective } from '../../ui/ui-button-helm/src/lib/hlm-button.directive';
 
 @Component({
   selector: 'app-room',
@@ -45,6 +46,7 @@ import {
     TodoComponent,
     MatIcon,
     TaskComponent,
+    HlmButtonDirective,
   ],
   templateUrl: './room.component.html',
   styleUrl: './room.component.scss',

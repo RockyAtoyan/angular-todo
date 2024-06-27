@@ -1,9 +1,11 @@
 <div class="placeholder" *cdkDragPlaceholder></div>
-<div class="bg-zinc-200 h-[36px] rounded">
-  <div class="flex items-center gap-4">
+<div
+  class="bg-[#15101C] h-[45px] rounded flex items-center px-1 text-[#9E78CF]"
+>
+  <div class="flex items-center gap-4 w-full">
     <button
       (click)="toggleTask()"
-      [class.done]="task.isDone"
+      [class.done]="task.isDone && false"
       class="flex items-center"
     >
       <mat-icon class="text-sm">check</mat-icon>
@@ -12,23 +14,23 @@
       <div class="flex flex-col">
         <h3 [class.done]="task.isDone">{{ task.text }}</h3>
         @if (task.deadline) {
-          <h4 [class.expired]="isExpired()" class="text-[10px] opacity-80">
-            {{ Deadline().toLocaleString() }}
-          </h4>
+        <h5 [class.expired]="isExpired()" class="text-[10px] opacity-80">
+          {{ Deadline().toLocaleString() }}
+        </h5>
         }
       </div>
       @if (!isInRoom || (isInRoom && isAdmin)) {
-        <div class="flex items-center gap-3">
-          <button (click)="openDialog()" class="text-lg">
-            <mat-icon class="text-lg">edit</mat-icon>
-          </button>
-          <button (click)="deleteTask()" class="text-red-400">
-            <mat-icon class="text-lg">close</mat-icon>
-          </button>
-          <button class="cursor-move flex items-center" cdkDragHandle>
-            <mat-icon class="text-zinc-500/70">drag_handle</mat-icon>
-          </button>
-        </div>
+      <div class="flex items-center gap-3">
+        <button (click)="openDialog()" class="text-lg">
+          <mat-icon class="text-lg">edit</mat-icon>
+        </button>
+        <button (click)="deleteTask()">
+          <mat-icon class="text-lg">close</mat-icon>
+        </button>
+        <button class="cursor-move flex items-center" cdkDragHandle>
+          <mat-icon class="text-zinc-500/70">drag_handle</mat-icon>
+        </button>
+      </div>
       }
     </div>
   </div>

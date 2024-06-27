@@ -1,7 +1,5 @@
-<app-layout>
-  <router-outlet></router-outlet>
-</app-layout>
+<router-outlet></router-outlet>
 @if (pendingService.isLoading | async) {
-  <app-loader></app-loader>
+<app-loader></app-loader>
 }
 <hlm-toaster richColors closeButton position="bottom-left" />
