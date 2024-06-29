@@ -6,6 +6,8 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { AuthService } from '../../auth.service';
 import { TodoService } from '../../todo.service';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { ToastrService } from 'ngx-toastr';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-login',
@@ -45,6 +47,7 @@ export class LoginComponent {
         localStorage.setItem('accessToken', value.accessToken);
         this.authService.auth();
         this.todoService.getTodos();
+        toast.info('You logged in!');
         const callbackUrl =
           this.route.snapshot?.queryParams['callbackUrl'] || null;
         this.router.navigateByUrl(callbackUrl || '/dashboard');

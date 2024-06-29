@@ -5,6 +5,8 @@ import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { MatIcon } from '@angular/material/icon';
 import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { ToastrService } from 'ngx-toastr';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-registration',
@@ -33,7 +35,7 @@ export class RegistrationComponent {
   constructor(
     private formBuilder: FormBuilder,
     private server: ServerService,
-    private router: Router,
+    private router: Router
   ) {}
 
   onFileChanged(event: any) {
@@ -52,12 +54,12 @@ export class RegistrationComponent {
     formData.append('login', login);
     formData.append('password', password);
     if (this.image) {
-      console.log(this.image);
       formData.append('image', this.image);
     }
     this.server.registration(formData)?.subscribe({
       next: (value) => {
-        this.router.navigate(['/login']);
+        toast.info('You signed up!');
+        this.router.navigateByUrl('/login');
       },
     });
     this.form.reset();

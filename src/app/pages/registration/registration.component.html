@@ -50,29 +50,7 @@
           formControlName="password"
         />
       </div>
-      <div class="mt-2 flex items-center justify-between">
-        <div class="flex items-center justify-center">
-          <label
-            for="signup_file"
-            class="cursor-pointer flex items-center gap-2 text-lg"
-            hlmBtn
-            variant="secondary"
-          >
-            <span>Choose avatar </span>
-            @if (image) {
-            <span class="flex items-center">
-              <mat-icon class="text-green-500">check</mat-icon>
-            </span>
-            }
-          </label>
-          <input
-            id="signup_file"
-            type="file"
-            #imageRef
-            (change)="onFileChanged($event)"
-            hidden
-          />
-        </div>
+      <div class="mt-2 flex items-center justify-center">
         <button class="w-1/2 text-lg" type="submit" hlmBtn>Sign up</button>
       </div>
 

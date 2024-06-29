@@ -30,7 +30,7 @@ export class AuthService {
       }
       case 'error': {
         //this.toast.error(message);
-        toast.error(message);
+        toast.error(Array.isArray(message) ? message[0] : message);
         break;
       }
     }
